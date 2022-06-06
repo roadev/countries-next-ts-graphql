@@ -24,7 +24,7 @@ const Home: NextPage = () => {
         <ChooseOption
           title="Lista de países"
           body="Aquí puedes ver la lista de país de nuestro sistema, buscar, filtrar y ver el detalle del que desees."
-          img="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Flag_of_the_Union_of_South_American_Nations.svg/1280px-Flag_of_the_Union_of_South_American_Nations.svg.png"
+          img="https://upload.wikimedia.org/wikipedia/cfommons/thumb/5/50/Flag_of_the_Union_of_South_American_Nations.svg/1280px-Flag_of_the_Union_of_South_American_Nations.svg.png"
           alt="Some latin american countries flags"
         />
         {/* <Typography variant="h4" component="h1" gutterBottom>
