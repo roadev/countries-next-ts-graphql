@@ -6,13 +6,13 @@ export interface FilterByOption {
 
 export const filterByOptions: FilterByOption[] = [
   {
-    key: 'currencies',
-    value: 'currencies',
-    label: 'Monedas',
+    key: 'currency',
+    value: 'currency',
+    label: 'Moneda',
   },
   {
-    key: 'continents',
-    value: 'continents',
-    label: 'Continentes',
+    key: 'continent',
+    value: 'continent',
+    label: 'Continente',
   },
 ];

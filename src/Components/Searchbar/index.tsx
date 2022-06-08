@@ -16,6 +16,13 @@ export default function Searchbar() {
     [filterBy, filterValue],
   );
 
+  const shouldExecuteCall = React.useMemo(
+    () =>
+      (filterBy === 'continent' && filterValue.length === 2) ||
+      (filterBy === 'currency' && filterValue.length === 3),
+    [filterBy, filterValue],
+  );
+
   const [executeSearch, { data, loading, error }] = useCountriesByCurrency();
 
   console.log('filterValue', filterValue);
@@ -23,7 +30,7 @@ export default function Searchbar() {
   console.log('******', data);
 
   React.useEffect(() => {
-    if (filterValue.length > 2 && !isEmpty(filterBy)) {
+    if (shouldExecuteCall && !isEmpty(filterBy)) {
       console.log('inside', filterStructure);
       executeSearch({ ...filterStructure });
     }
@@ -38,6 +45,7 @@ export default function Searchbar() {
   };
 
   const handleChangeFilterBy = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue('');
     setFilterBy(event.target.value);
   };
 
