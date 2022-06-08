@@ -16,8 +16,15 @@ describe('search field', () => {
 
   test('It should allow to type a currency in words', () => {
     const component = render(<Searchbar />);
-    const input = component.getByTestId('searchBar') as HTMLInputElement;
+    const input = component.getByTestId('searchBar').querySelector('input') as HTMLInputElement;
     fireEvent.change(input, { target: { value: 'COP' } });
     expect(input.value).toBe('COP');
+  });
+
+  test('It should allow to type a continent', () => {
+    const component = render(<Searchbar />);
+    const input = component.getByTestId('searchBar').querySelector('input') as HTMLInputElement;
+    fireEvent.change(input, { target: { value: 'South America' } });
+    expect(input.value).toBe('South America');
   });
 });
