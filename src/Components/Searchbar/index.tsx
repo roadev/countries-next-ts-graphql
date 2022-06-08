@@ -5,7 +5,6 @@ import { useCountriesByFilter } from '../../queries';
 import { filterByOptions, FilterByOption } from '../../Constants';
 import { SerializedCountry } from '../interfaces';
 import { serializeCountries } from '../../utils/serializer';
-// import { sleep } from '../../utils';
 
 interface Props {
   setCountries: (countries: SerializedCountry[]) => void;
