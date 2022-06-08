@@ -5,6 +5,8 @@ export const COUNTRIES_BY_CURRENCY = gql`
     countries(filter: $filter) {
       name
       currency
+      code
+      emoji
       continent {
         name
       }
@@ -12,10 +14,6 @@ export const COUNTRIES_BY_CURRENCY = gql`
   }
 `;
 
-// interface Props {
-//   filter: string;
-// }
-
-export function useCountriesByCurrency() {
+export function useCountriesByFilter() {
   return useLazyQuery(COUNTRIES_BY_CURRENCY);
 }

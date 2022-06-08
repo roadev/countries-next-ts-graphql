@@ -34,7 +34,9 @@ export default function App(props: CountriesApp) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
+          <main>
+            <Component {...pageProps} />
+          </main>
         </ApolloProvider>
       </ThemeProvider>
     </CacheProvider>

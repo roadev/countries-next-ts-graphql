@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useQuery } from '@apollo/client';
+import apolloClient from '../../Services/apollo-client';
 import { QUERY } from '../../queries';
 
 interface Props {
@@ -12,3 +13,5 @@ export default function useCountriesByCurrency({ filter }: Props) {
   console.log(data);
   return data;
 }
+
+// unused

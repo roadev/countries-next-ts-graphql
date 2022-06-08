@@ -1,11 +1,17 @@
 import * as React from 'react';
-import { MenuItem, TextField } from '@mui/material';
-import { isEmpty } from 'ramda';
-import { useCountriesByCurrency } from '../../queries';
+import { Grid, MenuItem, TextField } from '@mui/material';
+import { isEmpty, isNil } from 'ramda';
+import { useCountriesByFilter } from '../../queries';
 import { filterByOptions, FilterByOption } from '../../Constants';
+import { Country, SerializedCountry } from '../interfaces';
+import { serializeCountries } from '../../utils/serializer';
 // import { sleep } from '../../utils';
 
-export default function Searchbar() {
+interface Props {
+  setCountries: (countries: SerializedCountry[]) => void;
+}
+
+export default function Searchbar({ setCountries }: Props) {
   const [filterValue, setValue] = React.useState('');
   const [filterBy, setFilterBy] = React.useState('');
 
@@ -23,11 +29,7 @@ export default function Searchbar() {
     [filterBy, filterValue],
   );
 
-  const [executeSearch, { data, loading, error }] = useCountriesByCurrency();
-
-  console.log('filterValue', filterValue);
-
-  console.log('******', data);
+  const [executeSearch, { data, loading, error }] = useCountriesByFilter();
 
   React.useEffect(() => {
     if (shouldExecuteCall && !isEmpty(filterBy)) {
@@ -35,6 +37,13 @@ export default function Searchbar() {
       executeSearch({ ...filterStructure });
     }
   }, [filterValue]);
+
+  React.useEffect(() => {
+    if (!isEmpty(data) && !isNil(data)) {
+      const serializedCountries: SerializedCountry[] = serializeCountries(data.countries);
+      setCountries(serializedCountries);
+    }
+  }, [data]);
 
   const handleChangeFilterValue = async ({
     currentTarget,
@@ -50,32 +59,44 @@ export default function Searchbar() {
   };
 
   return (
-    <>
-      <TextField
-        id="search-field"
-        data-testid="searchBar"
-        type="string"
-        value={filterValue}
-        onChange={handleChangeFilterValue}
-        variant="standard"
-        disabled={isEmpty(filterBy)}
-      />
-
-      <TextField
-        id="filter-by"
-        select
-        label="Filtrar por"
-        value={filterBy}
-        onChange={handleChangeFilterBy}
-        helperText="Selecciona un filtro"
-        variant="standard"
-      >
-        {filterByOptions.map((option: FilterByOption) => (
-          <MenuItem key={option.key} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
-    </>
+    <Grid
+      component="article"
+      container
+      direction="row"
+      justifyContent="space-between"
+      xs={12}
+      spacing={2}
+      item
+    >
+      <Grid container direction="column" xs={5} item>
+        <TextField
+          id="search-field"
+          label="Filtra país"
+          data-testid="searchBar"
+          type="string"
+          value={filterValue}
+          onChange={handleChangeFilterValue}
+          variant="standard"
+          disabled={isEmpty(filterBy)}
+        />
+      </Grid>
+      <Grid container direction="column" xs={5} item>
+        <TextField
+          id="filter-by"
+          select
+          label="Filtrar por"
+          value={filterBy}
+          onChange={handleChangeFilterBy}
+          helperText="Selecciona un filtro"
+          variant="standard"
+        >
+          {filterByOptions.map((option: FilterByOption) => (
+            <MenuItem key={option.key} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Grid>
+    </Grid>
   );
 }
