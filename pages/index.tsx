@@ -2,12 +2,8 @@ import * as React from 'react';
 import type { NextPage } from 'next';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import styled from '@emotion/styled';
-// import ProTip from '../src/ProTip';
-// import Copyright from '../src/Copyright';
 import ChooseOption from '../src/Components/ChooseOption';
-import Link, { StyledLink } from '../src/Components/Link';
-// import countriesImg from '../src/Assets/countries.jpg';
+import { StyledLink } from '../src/Components/Link';
 
 const Home: NextPage = () => {
   return (

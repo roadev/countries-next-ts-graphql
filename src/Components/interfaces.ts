@@ -2,6 +2,10 @@ export interface Continent {
   name: string;
 }
 
+export interface Language {
+  name: string;
+}
+
 export interface Country {
   name: string;
   code: string;
@@ -16,4 +20,14 @@ export interface SerializedCountry {
   emoji: string;
   currency: string;
   continent: string;
+}
+
+export interface DetailList {
+  title: string;
+  detail: string;
+}
+
+export interface SingleCountry extends Country {
+  languages: Language[];
+  capital: string;
 }

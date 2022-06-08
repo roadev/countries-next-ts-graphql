@@ -10,11 +10,12 @@ import {
   Typography,
 } from '@mui/material';
 import { useCountryByFilter } from '../../queries';
+import { SingleCountry, DetailList, Language } from '../interfaces';
 
 export default function CountryDetailTable(): JSX.Element {
   const router = useRouter();
   const { code } = router.query;
-  const [executeSearch, { data, loading, error }] = useCountryByFilter();
+  const [executeSearch, { data }] = useCountryByFilter();
 
   const filterStructure = React.useMemo(
     () => ({
@@ -23,19 +24,21 @@ export default function CountryDetailTable(): JSX.Element {
     [code],
   );
 
-  const detailsList = ({ code, currency, continent, languages, capital }) => [
+  const detailsList = ({
+    code,
+    currency,
+    continent,
+    languages,
+    capital,
+  }: SingleCountry): DetailList[] => [
     { title: 'Código', detail: code },
     { title: 'Moneda', detail: currency },
     { title: 'Continente', detail: continent.name },
-    { title: 'Idiomas', detail: languages.map((lang: any) => lang.name).join(' ') },
+    { title: 'Idiomas', detail: languages.map((lang: Language) => lang.name).join(' ') },
     { title: 'Capital', detail: capital },
   ];
 
-  if (data) {
-    console.log(detailsList(data.country));
-  }
-
-  const getFormattedItemText = (item) => (
+  const getFormattedItemText = (item: DetailList) => (
     <>
       <Typography variant="h6">{item.title}: </Typography>
       <Typography>{item.detail}</Typography>
@@ -50,12 +53,9 @@ export default function CountryDetailTable(): JSX.Element {
 
   React.useEffect(() => {
     if (!isNil(code)) {
-      console.log('filterStructure', filterStructure);
       executeSearch({ ...filterStructure });
     }
   }, [code]);
-  console.log('router', code);
-  console.log('data', data);
 
   return !isNil(data) && !isEmpty(data) ? (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }} aria-label="contacts">

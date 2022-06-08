@@ -29,11 +29,10 @@ export default function Searchbar({ setCountries }: Props) {
     [filterBy, filterValue],
   );
 
-  const [executeSearch, { data, loading, error }] = useCountriesByFilter();
+  const [executeSearch, { data }] = useCountriesByFilter();
 
   React.useEffect(() => {
     if (shouldExecuteCall && !isEmpty(filterBy)) {
-      console.log('inside', filterStructure);
       executeSearch({ ...filterStructure });
     }
   }, [filterValue]);
