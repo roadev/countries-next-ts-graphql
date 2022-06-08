@@ -11,7 +11,8 @@
     "camelcase": "error",
     "spaced-comment": "error",
     "quotes": ["error", "single"],
-    "no-duplicate-imports": "error"
+    "no-duplicate-imports": "error",
+    "jsx-quotes": ["error", "prefer-double"]
   },
   "settings": {
     "import/resolver": {
