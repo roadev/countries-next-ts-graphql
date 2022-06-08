@@ -9,7 +9,6 @@ import {
   TablePagination,
   TableRow,
 } from '@mui/material';
-import { useRouter } from 'next/router';
 import { StyledLink } from '../Link';
 import { SerializedCountry } from '../interfaces';
 
@@ -45,9 +44,7 @@ interface Props {
   countries: SerializedCountry[];
 }
 
-export default function StickyHeadTable({ countries }: Props) {
-  const router = useRouter();
-  console.log('countries', countries);
+export default function CountriesTable({ countries }: Props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -61,12 +58,6 @@ export default function StickyHeadTable({ countries }: Props) {
   };
 
   const ROUTE_COUNTRY_CODE = 'country-detail/[code]';
-
-  //   const navigate = (code: string) => () =>
-  //     router.push({
-  //       pathname: ROUTE_COUNTRY_CODE,
-  //       query: { code },
-  //     });
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>

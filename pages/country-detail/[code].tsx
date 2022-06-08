@@ -1,8 +1,21 @@
 import * as React from 'react';
-import { useRouter } from 'next/router';
+import { Container, Box } from '@mui/material';
+import CountryDetailTable from '../../src/Components/CountryDetailTable';
 
 export default function CountryDetail() {
-  const router = useRouter();
-  console.log('router', router.query);
-  return <div>test</div>;
+  return (
+    <Container maxWidth="lg">
+      <Box
+        sx={{
+          my: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <CountryDetailTable />
+      </Box>
+    </Container>
+  );
 }
