@@ -103,3 +103,8 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(props,
 });
 
 export default Link;
+
+export const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`;

@@ -7,8 +7,6 @@ import CountriesTable from '../src/Components/CountriesTable';
 export default function Countries() {
   const [countries, setCountries] = React.useState([]);
 
-  console.log(countries);
-
   return (
     <>
       <header>

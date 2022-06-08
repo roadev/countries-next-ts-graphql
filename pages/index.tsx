@@ -6,12 +6,8 @@ import styled from '@emotion/styled';
 // import ProTip from '../src/ProTip';
 // import Copyright from '../src/Copyright';
 import ChooseOption from '../src/Components/ChooseOption';
-import Link from '../src/Components/Link';
+import Link, { StyledLink } from '../src/Components/Link';
 // import countriesImg from '../src/Assets/countries.jpg';
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`;
 
 const Home: NextPage = () => {
   return (
@@ -25,8 +21,6 @@ const Home: NextPage = () => {
           alignItems: 'center',
         }}
       >
-        
-        
         <StyledLink href="/countries" noLinkStyle>
           <ChooseOption
             title="Lista de países"
@@ -35,7 +29,6 @@ const Home: NextPage = () => {
             alt="Some latin american countries flags"
           />
         </StyledLink>
-
       </Box>
     </Container>
   );

@@ -9,6 +9,8 @@ import {
   TablePagination,
   TableRow,
 } from '@mui/material';
+import { useRouter } from 'next/router';
+import { StyledLink } from '../Link';
 import { SerializedCountry } from '../interfaces';
 
 interface Column {
@@ -20,20 +22,20 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'emoji', label: 'Bandera', minWidth: 90 },
+  { id: 'emoji', label: 'Bandera', minWidth: 80 },
   { id: 'name', label: 'País', minWidth: 170 },
-  { id: 'code', label: 'Código', minWidth: 100 },
+  { id: 'code', label: 'Código', minWidth: 80 },
   {
     id: 'currency',
     label: 'Moneda',
-    minWidth: 170,
+    minWidth: 120,
     align: 'right',
     format: (value: number) => value.toLocaleString('es-CO'),
   },
   {
     id: 'continent',
     label: 'Continente',
-    minWidth: 120,
+    minWidth: 150,
     align: 'right',
     format: (value: number) => value.toLocaleString('es-CO'),
   },
@@ -44,6 +46,7 @@ interface Props {
 }
 
 export default function StickyHeadTable({ countries }: Props) {
+  const router = useRouter();
   console.log('countries', countries);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -56,6 +59,14 @@ export default function StickyHeadTable({ countries }: Props) {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const ROUTE_COUNTRY_CODE = 'country-detail/[code]';
+
+  //   const navigate = (code: string) => () =>
+  //     router.push({
+  //       pathname: ROUTE_COUNTRY_CODE,
+  //       query: { code },
+  //     });
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -84,9 +95,16 @@ export default function StickyHeadTable({ countries }: Props) {
                       const value = country[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
+                          <StyledLink
+                            href={{
+                              pathname: ROUTE_COUNTRY_CODE,
+                              query: { code: country.code },
+                            }}
+                          >
+                            {column.format && typeof value === 'number'
+                              ? column.format(value)
+                              : value}
+                          </StyledLink>
                         </TableCell>
                       );
                     })}

@@ -3,7 +3,7 @@ import { Grid, MenuItem, TextField } from '@mui/material';
 import { isEmpty, isNil } from 'ramda';
 import { useCountriesByFilter } from '../../queries';
 import { filterByOptions, FilterByOption } from '../../Constants';
-import { Country, SerializedCountry } from '../interfaces';
+import { SerializedCountry } from '../interfaces';
 import { serializeCountries } from '../../utils/serializer';
 // import { sleep } from '../../utils';
 
